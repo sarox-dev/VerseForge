@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sh5d0ej5lj47"]
+
+[ext_resource type="Script" uid="uid://575ynefnhst5" path="res://scripts/intro/multi_window_setup.gd" id="1_0ckim"]
+
+[node name="multi_window_setup" type="Node2D"]
+script = ExtResource("1_0ckim")

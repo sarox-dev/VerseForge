@@ -1,0 +1,125 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpw2jw8f6obhv"]
+
+[ext_resource type="Script" uid="uid://ci0q8taejjxrr" path="res://scripts/lyrics_display/song_lyrics_control.gd" id="1_bx85o"]
+[ext_resource type="PackedScene" uid="uid://by1dy8j3r5o6x" path="res://scenes/background.tscn" id="2_dpyqd"]
+[ext_resource type="Shader" uid="uid://yxv72my14v8p" path="res://shaders/image_corners.gdshader" id="2_eqa0l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53eqx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smlc2"]
+bg_color = Color(1, 1, 1, 0.486275)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n40ri"]
+shader = ExtResource("2_eqa0l")
+shader_parameter/radius_scale = 1.0
+shader_parameter/rounded_corner_top_left = true
+shader_parameter/rounded_corner_top_right = true
+shader_parameter/rounded_corner_bottom_left = true
+shader_parameter/rounded_corner_bottom_right = true
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
+
+[node name="lyrics_screen" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bx85o")
+
+[node name="background" parent="." instance=ExtResource("2_dpyqd")]
+layout_mode = 1
+
+[node name="container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ProgressBar" type="ProgressBar" parent="container"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_53eqx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_smlc2")
+show_percentage = false
+
+[node name="TITLE" type="VBoxContainer" parent="container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="song" type="RichTextLabel" parent="container/TITLE"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.84446, 0.834943, 0.935963, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.921569)
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+fit_content = true
+
+[node name="artist" type="RichTextLabel" parent="container/TITLE"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+fit_content = true
+
+[node name="lyrics" type="MarginContainer" parent="container"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 32
+
+[node name="lyrics" type="RichTextLabel" parent="container/lyrics"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.162066, 0.162066, 0.162066, 0.368627)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 64
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="image" type="TextureRect" parent="."]
+modulate = Color(0.2484, 0.2484, 0.2484, 1)
+material = SubResource("ShaderMaterial_n40ri")
+custom_minimum_size = Vector2(288, 288)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -144.0
+offset_right = 144.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(144, 144)
+expand_mode = 1
+stretch_mode = 5

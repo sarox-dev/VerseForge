@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://eug2peqtgqc"]
+
+[ext_resource type="Script" uid="uid://cp7ceyiwcjvj6" path="res://scripts/main_window/main.gd" id="1_03cyx"]
+[ext_resource type="PackedScene" uid="uid://cxqt8ecm247hp" path="res://hardcoded_themes/minecraft/wallpaper.tscn" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://difwlkkieoskt" path="res://scripts/main_window/websocket_manager.gd" id="4_jyhfs"]
+[ext_resource type="FontFile" uid="uid://dr852cx7xf40q" path="res://assets/fonts/roboto/Roboto-Black.ttf" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://b8rjyxr501wfu" path="res://modules/video_loader.gd" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://blpufb4ljmoth" path="res://assets/images/loader-circle.svg" id="6_tefeu"]
+
+[sub_resource type="GDScript" id="GDScript_o6xl0"]
+resource_name = "Rotating"
+script/source = "extends VBoxContainer
+
+@onready var texture_rect: TextureRect = $Control/TextureRect
+
+func _process(delta: float) -> void:
+	if DisplayServer.window_get_mode(0) != DisplayServer.WINDOW_MODE_MINIMIZED:
+		texture_rect.rotation_degrees += 4
+	else:
+		set_process(false)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_tefeu"]
+font = ExtResource("4_tefeu")
+font_size = 24
+font_color = Color(0.868985, 0.868985, 0.868985, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o6xl0"]
+font = ExtResource("4_tefeu")
+font_color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_03cyx")
+
+[node name="lyrics" type="Window" parent="."]
+title = "VF_desktop_0"
+initial_position = 1
+visible = false
+borderless = true
+popup_window = true
+
+[node name="wallpaper" parent="lyrics" instance=ExtResource("2_tbgi4")]
+
+[node name="all_requests" type="Node" parent="."]
+
+[node name="in_the_future" type="HTTPRequest" parent="all_requests"]
+
+[node name="start_animation" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+script = SubResource("GDScript_o6xl0")
+
+[node name="Label" type="Label" parent="start_animation"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Starting"
+label_settings = SubResource("LabelSettings_tefeu")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Control" type="Control" parent="start_animation"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="start_animation/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 24)
+texture = ExtResource("6_tefeu")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="version" type="Label" parent="start_animation"]
+layout_mode = 2
+text = "
+
+"
+label_settings = SubResource("LabelSettings_o6xl0")
+horizontal_alignment = 1
+
+[node name="WebSocketManager" type="Node" parent="."]
+script = ExtResource("4_jyhfs")
+metadata/_custom_type_script = "uid://difwlkkieoskt"
+
+[node name="VideoLoader" type="Node" parent="."]
+script = ExtResource("5_tbgi4")
+metadata/_custom_type_script = "uid://b8rjyxr501wfu"

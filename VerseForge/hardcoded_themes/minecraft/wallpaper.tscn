@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxqt8ecm247hp"]
+
+[ext_resource type="Script" uid="uid://bbaecok20xhb6" path="res://hardcoded_themes/minecraft/wallpaper.gd" id="1_poa6l"]
+[ext_resource type="Script" uid="uid://b8rjyxr501wfu" path="res://modules/video_loader.gd" id="2_uuy3d"]
+[ext_resource type="FontFile" uid="uid://bpye0uonq2unj" path="res://hardcoded_themes/minecraft/font/bold.otf" id="3_3onyg"]
+[ext_resource type="FontFile" uid="uid://dqxualsoxlcvl" path="res://hardcoded_themes/minecraft/font/regular.otf" id="4_hgwb6"]
+
+[sub_resource type="FontVariation" id="FontVariation_3onyg"]
+base_font = ExtResource("3_3onyg")
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_fiqrr"]
+font = SubResource("FontVariation_3onyg")
+font_size = 64
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.352941)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_btt1h"]
+font = ExtResource("4_hgwb6")
+font_size = 32
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.196078)
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3onyg"]
+font = ExtResource("4_hgwb6")
+font_size = 32
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.415686)
+shadow_offset = Vector2(4, 4)
+
+[node name="wallpaper" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_poa6l")
+
+[node name="VideoLoader" type="Node" parent="."]
+script = ExtResource("2_uuy3d")
+metadata/_custom_type_script = "uid://b8rjyxr501wfu"
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="title" type="Label" parent="vbox"]
+layout_mode = 2
+text = "Song name text will go here"
+label_settings = SubResource("LabelSettings_fiqrr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="author" type="Label" parent="vbox"]
+layout_mode = 2
+text = "author name here"
+label_settings = SubResource("LabelSettings_btt1h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="debug" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+
+[node name="debug" type="Label" parent="debug"]
+layout_mode = 2
+text = "BPM"
+label_settings = SubResource("LabelSettings_3onyg")
+
+[node name="bass" type="Label" parent="debug"]
+layout_mode = 2
+text = "Bass"
+label_settings = SubResource("LabelSettings_3onyg")
+
+[node name="kick" type="Label" parent="debug"]
+layout_mode = 2
+text = "Kick"
+label_settings = SubResource("LabelSettings_3onyg")
+
+[node name="snare" type="Label" parent="debug"]
+layout_mode = 2
+text = "Snare"
+label_settings = SubResource("LabelSettings_3onyg")
+
+[node name="hihat" type="Label" parent="debug"]
+layout_mode = 2
+text = "Hihat"
+label_settings = SubResource("LabelSettings_3onyg")
+
+[node name="bright" type="Label" parent="debug"]
+layout_mode = 2
+text = "Bright"
+label_settings = SubResource("LabelSettings_3onyg")
+
+[node name="downbeat" type="Label" parent="debug"]
+layout_mode = 2
+text = "Downbeat"
+label_settings = SubResource("LabelSettings_3onyg")
